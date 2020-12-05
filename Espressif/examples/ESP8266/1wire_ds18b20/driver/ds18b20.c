@@ -224,9 +224,8 @@ void ICACHE_FLASH_ATTR write(uint8_t v, int power)
 	for (bitMask = 0x01; bitMask; bitMask <<= 1) {
 		write_bit((bitMask & v)?1:0);
 	}
-	if (!power) {
-		GPIO_DIS_OUTPUT(DS18B20_PIN);
-		GPIO_OUTPUT_SET(DS18B20_PIN, 0);
+	if (power) {
+		GPIO_OUTPUT_SET(DS18B20_PIN, 1);
 	}
 }
 
@@ -239,11 +238,11 @@ void ICACHE_FLASH_ATTR write_bit(int v)
 	GPIO_OUTPUT_SET(DS18B20_PIN, 0);
 	if(v) {
 		os_delay_us(10);
-		GPIO_OUTPUT_SET(DS18B20_PIN, 1);
+		GPIO_DIS_OUTPUT(DS18B20_PIN);
 		os_delay_us(55);
 	} else {
 		os_delay_us(65);
-		GPIO_OUTPUT_SET(DS18B20_PIN, 1);
+		GPIO_DIS_OUTPUT(DS18B20_PIN);
 		os_delay_us(5);
 	}
 }
