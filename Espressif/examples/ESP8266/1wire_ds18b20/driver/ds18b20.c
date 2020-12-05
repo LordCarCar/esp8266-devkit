@@ -226,7 +226,7 @@ void ICACHE_FLASH_ATTR write(uint8_t v, int power)
 	}
 	if (!power) {
 		GPIO_DIS_OUTPUT(DS18B20_PIN);
-		GPIO_OUTPUT_SET(DS18B20_PIN, 0);
+//		GPIO_OUTPUT_SET(DS18B20_PIN, 0);
 	}
 }
 
